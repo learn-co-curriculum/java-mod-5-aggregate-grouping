@@ -25,10 +25,52 @@ The basic syntax of the `SELECT` statement is enhanced to support aggregate func
   within one or more columns.
 - The `HAVING` clause is optional. The clause selects a subset of grouped rows that match a predicate.
 
-
-## Aggregate Functions  (Code Along)
+## Table Setup
 
 We will work with the same `pet` table from the previous lesson.  
+The statements to create the table and insert 8 rows is provided below:
+
+```sql
+DROP TABLE IF EXISTS pet;
+
+CREATE TABLE pet (
+        id  INTEGER PRIMARY KEY,
+        name TEXT,
+        species TEXT,
+        breed TEXT,
+        age INTEGER
+);
+
+INSERT INTO pet (id, name, species, breed, age) 
+VALUES (1, 'Moe', 'cat', 'Tabby', 10);
+
+INSERT INTO pet (id, name, species, breed, age) 
+VALUES (2, 'Hana', 'cat', 'Tabby', 1);
+
+-- Use two single quotes '' to escape a single quote character in the name
+INSERT INTO pet (id, name, species, breed, age) 
+VALUES (3, 'Lil'' Bub', 'cat', 'American Shorthair', 5);
+
+INSERT INTO pet (id, name, species, breed, age) 
+VALUES (4, 'Snuggles', 'dog', 'Bichon', 5);
+
+--unknown age
+INSERT INTO pet (id, name, species, breed)
+VALUES (5, 'Honey', 'dog', 'Cavachon');
+
+-- unknown breed
+INSERT INTO pet (id, name, species, age)
+VALUES (6, 'Herbie', 'fish', 4);
+
+INSERT INTO pet (id, name, species, breed, age) 
+VALUES (7, 'Fifi', 'dog', 'Poodle', 1);
+
+INSERT INTO pet (id, name, species, breed, age) 
+VALUES (8, 'Lulu', 'dog', 'Yorkiepoo', 12);
+```
+
+
+## Aggregate Functions  (Code Along)
 
 SQL provides functions for aggregating values across multiple rows:
 
@@ -172,7 +214,7 @@ FROM pet;
 ```text
 sum
 
-35
+38
 ```
 
 </td>
@@ -185,7 +227,7 @@ Sum the ages of Tabby cats:
 ```sql
 SELECT SUM(age)
 FROM pet
-WHERE breed = 'Tabby' and species = 'cat' ;
+WHERE breed = 'Tabby' AND species = 'cat' ;
 ```
 
 </td>
@@ -216,7 +258,7 @@ FROM pet;
 ```text
 min max avg
 
-1   12  5    
+1   12  5.428571428    
 ```
 
 </td>
@@ -321,7 +363,7 @@ Display a count of rows per species:
 ```sql
 SELECT species, COUNT(*)
 FROM pet
-GROUP BY species
+GROUP BY species;
 ```
 
 </td>
@@ -348,7 +390,7 @@ in ascending order:
 SELECT species, COUNT(*)
 FROM pet
 GROUP BY species
-ORDER BY count
+ORDER BY count;
 ```
 
 </td>
@@ -376,7 +418,7 @@ omitting null values:
 SELECT age, COUNT(*)
 FROM pet
 WHERE age IS NOT NULL
-GROUP BY age
+GROUP BY age;
 ```
 
 </td>
@@ -385,10 +427,9 @@ GROUP BY age
 ```text
 age count
 
-5   1
+5   2
 4   1
 10  1
-2   1
 12  1
 1   2
 ```
@@ -406,7 +447,7 @@ SELECT age, COUNT(*)
 FROM pet
 WHERE age IS NOT NULL
 GROUP BY age
-ORDER BY count DESC
+ORDER BY count DESC;
 ```
 
 </td>
@@ -415,11 +456,10 @@ ORDER BY count DESC
 ```text
 age count
 
+5   2
 1   2
-5   1
 4   1
 10  1
-2   1
 12  1
 ```
 
@@ -434,7 +474,7 @@ Min and max age per species:
 ```sql
 SELECT species, MIN(age), MAX(age)
 FROM pet
-GROUP BY species
+GROUP BY species;
 ```
 
 </td>
@@ -476,7 +516,7 @@ Display a count of rows per species:
 SELECT species, COUNT(*) AS species_count
 FROM pet
 GROUP BY species
-ORDER BY species_count
+ORDER BY species_count;
 ```
 
 </td>
@@ -527,7 +567,7 @@ Display species count:
 ```sql
 SELECT species, COUNT(*)
 FROM pet
-GROUP BY species
+GROUP BY species;
 ```
 
 </td>
@@ -612,7 +652,7 @@ SELECT species, COUNT(*)
 FROM pet
 WHERE age IS NOT NULL
 GROUP BY species
-HAVING COUNT(*) > 1
+HAVING COUNT(*) > 1;
 ```
 
 </td>
@@ -621,17 +661,12 @@ HAVING COUNT(*) > 1
 ```text
 species count
 
-cat     3
 dog     3
+cat     3
 ```
 
 </td>
 </tr>
-
-
-
-
-
 
 
 </table>
