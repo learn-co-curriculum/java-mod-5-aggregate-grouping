@@ -95,19 +95,21 @@ Result
 <td>
 Count all rows:
 
-```sql
+<pre>
+<code>
 SELECT COUNT(*)
 FROM pet;
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 count
 
 8
-```
+</pre>
 
 </td>
 </tr>
@@ -117,19 +119,21 @@ count
 Count rows
 with a non-null value in name:
 
-```sql
+<pre>
+<code>
 SELECT COUNT(name)
 FROM pet;
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 count
 
 8
-```
+</pre>
 
 </td>
 </tr>
@@ -139,19 +143,21 @@ count
 Count rows
 with a non-null value in age:
 
-```sql
+<pre>
+<code>
 SELECT COUNT(age)
 FROM pet;
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 count
 
 7
-```
+</pre>
 
 </td>
 </tr>
@@ -160,19 +166,21 @@ count
 <td>
 Count of distinct species:
 
-```sql
+<pre>
+<code>
 SELECT COUNT(DISTINCT species)
 FROM pet;
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 count
 
 3
-```
+</pre>
 
 </td>
 </tr>
@@ -181,20 +189,22 @@ count
 <td>
 Count the number of dogs:
 
-```sql
+<pre>
+<code>
 SELECT COUNT(*)
 FROM pet
 WHERE species = 'dog';
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 count
 
 4
-```
+</pre>
 
 </td>
 </tr>
@@ -203,19 +213,21 @@ count
 <td>
 Sum the ages of all pets:
 
-```sql
+<pre>
+<code>
 SELECT SUM(age)
 FROM pet;
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 sum
 
 38
-```
+</pre>
 
 </td>
 </tr>
@@ -224,20 +236,22 @@ sum
 <td>
 Sum the ages of Tabby cats:
 
-```sql
+<pre>
+<code>
 SELECT SUM(age)
 FROM pet
 WHERE breed = 'Tabby' AND species = 'cat' ;
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 sum
 
 11
-```
+</pre>
 
 </td>
 </tr>
@@ -247,19 +261,21 @@ sum
 Minimum, maximum and average age
 among all pets:
 
-```sql
+<pre>
+<code>
 SELECT MIN(age), MAX(age), AVG(age)
 FROM pet;
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 min max avg
 
 1   12  5.428571428    
-```
+</pre>
 
 </td>
 </tr>
@@ -269,20 +285,22 @@ min max avg
 Minimum, maximum and average age
 among all cats:
 
-```sql
+<pre>
+<code>
 SELECT MIN(age), MAX(age), AVG(age)
 FROM pet
 WHERE species = 'cat';
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 min max avg
 
 1   10  5.333333333
-```
+</pre>
 
 </td>
 </tr>
@@ -292,20 +310,22 @@ min max avg
 <td>
 Truncate to display 2 digits after decimal point:
 
-```sql
+<pre>
+<code>
 SELECT MIN(age), MAX(age), TRUNC(AVG(age),2) 
 FROM pet
 WHERE species = 'cat';
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 min max avg
 
 1   10  5.33
-```
+</pre>
 
 </td>
 </tr>
@@ -360,22 +380,24 @@ Result
 <td>
 Display a count of rows per species:
 
-```sql
+<pre>
+<code>
 SELECT species, COUNT(*)
 FROM pet
 GROUP BY species;
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 species count
 
 dog     4
 cat     3
 fish    1
-```
+</pre>
 
 </td>
 </tr>
@@ -386,23 +408,25 @@ fish    1
 Sort the species count
 in ascending order:
 
-```sql
+<pre>
+<code>
 SELECT species, COUNT(*)
 FROM pet
 GROUP BY species
 ORDER BY count;
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 species count
 
 fish    1
 cat     3
 dog     4
-```
+</pre>
 
 </td>
 </tr>
@@ -414,17 +438,19 @@ dog     4
 Count rows per age,
 omitting null values:
 
-```sql
+<pre>
+<code>
 SELECT age, COUNT(*)
 FROM pet
 WHERE age IS NOT NULL
 GROUP BY age;
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 age count
 
 5   2
@@ -432,7 +458,7 @@ age count
 10  1
 12  1
 1   2
-```
+</pre>
 
 </td>
 </tr>
@@ -442,18 +468,20 @@ age count
 Sort the age count
 in descending order:
 
-```sql
+<pre>
+<code>
 SELECT age, COUNT(*)
 FROM pet
 WHERE age IS NOT NULL
 GROUP BY age
 ORDER BY count DESC;
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 age count
 
 5   2
@@ -461,7 +489,7 @@ age count
 4   1
 10  1
 12  1
-```
+</pre>
 
 </td>
 </tr>
@@ -471,22 +499,24 @@ age count
 <td>
 Min and max age per species:
 
-```sql
+<pre>
+<code>
 SELECT species, MIN(age), MAX(age)
 FROM pet
 GROUP BY species;
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 species min max
 
 dog     1   12
 cat     1   10
 fish    4   4
-```
+</pre>
 
 </td>
 </tr>
@@ -512,23 +542,25 @@ Result
 <td>
 Display a count of rows per species:
 
-```sql
+<pre>
+<code>
 SELECT species, COUNT(*) AS species_count
 FROM pet
 GROUP BY species
 ORDER BY species_count;
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 species species_count
 
 fish    1
 cat     3
 dog     4
-```
+</pre>
 
 </td>
 </tr>
@@ -564,22 +596,24 @@ Result
 
 Display species count:
 
-```sql
+<pre>
+<code>
 SELECT species, COUNT(*)
 FROM pet
 GROUP BY species;
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 species count
 
 dog     4
 cat     3
 fish    1
-```
+</pre>
 
 </td>
 </tr>
@@ -590,22 +624,24 @@ fish    1
 Display species counts
 that exceed 1:
 
-```sql
+<pre>
+<code>
 SELECT species, COUNT(*)
 FROM pet
 GROUP BY species
 HAVING COUNT(*) > 1;
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 species count
 
 dog     4
 cat     3
-```
+</pre>
 
 </td>
 </tr>
@@ -618,23 +654,25 @@ Display species counts
 that exceed 1 sorted
 in ascending order:
 
-```sql
+<pre>
+<code>
 SELECT species, COUNT(*)
 FROM pet
 GROUP BY species
 HAVING COUNT(*) > 1
 ORDER BY count;
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 species count
 
 cat     3
 dog     4
-```
+</pre>
 
 </td>
 </tr>
@@ -647,23 +685,25 @@ Omit rows with null
 values for age from
 the species count:
 
-```sql
+<pre>
+<code>
 SELECT species, COUNT(*)
 FROM pet
 WHERE age IS NOT NULL
 GROUP BY species
 HAVING COUNT(*) > 1;
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 species count
 
 dog     3
 cat     3
-```
+</pre>
 
 </td>
 </tr>
@@ -695,22 +735,24 @@ Result
 <td>
 Omit species in SELECT clause
 
-```sql
+<pre>
+<code>
 SELECT COUNT(*)
 FROM pet
 GROUP BY species
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 count
 
 4
 3
 1
-```
+</pre>
 
 </td>
 </tr>
@@ -738,18 +780,20 @@ Result
 <tr>
 <td>
 
-```sql
+<pre>
+<code>
 SELECT species, COUNT(*)
 FROM pet
-```
+</code>
+</pre>
 
 </td>
 <td>
 
-```text
+<pre>
 ERROR:  column "pet.species" must appear in the GROUP BY clause
  or be used in an aggregate function
-```
+</pre>
 
 </td>
 </tr>
